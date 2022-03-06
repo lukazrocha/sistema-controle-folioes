@@ -23,11 +23,11 @@ public class FoliaoManagerBean implements Serializable {
     Foliao foliao;
     List<Foliao> folioes;
     private int idFoliao;
-    
+
     private Ingresso ingresso;
     private List<Ingresso> ingressos = new ArrayList<>();
     private Double valorIngresso;
-    
+
     @EJB
     FoliaoServico foliaoServico;
 
@@ -40,15 +40,15 @@ public class FoliaoManagerBean implements Serializable {
         ingresso = new Ingresso();
         ingresso.setSetor(Setor.CAMAROTE);
     }
-    
+
     public void compraIngresso() {
         ingressos.add(this.ingresso);
         this.foliao.setIngressos(ingressos);
         this.atualizar();
         this.iniciar();
     }
-    
-        public void alteraValor(){
+
+    public void alteraValor() {
         switch (ingresso.getSetor()) {
             case PISTA:
                 this.valorIngresso = ingresso.getSetor().PISTA.getValor();
@@ -62,17 +62,16 @@ public class FoliaoManagerBean implements Serializable {
         }
         ingresso.setValor(valorIngresso);
     }
-    
-    
-    public Foliao pegarPorIdQuery(){
+
+    public Foliao pegarPorIdQuery() {
         System.out.println("ID: " + this.idFoliao);
         Foliao objeto = foliaoServico.getEntityManager()
                 .createQuery("select e from Foliao e where e.id = " + this.idFoliao, Foliao.class).getSingleResult();
         this.foliao = objeto;
         return this.foliao;
     }
-    
-    public Foliao pegarPorId(Long id){
+
+    public Foliao pegarPorId(Long id) {
         Foliao objeto = foliaoServico.getEntityManager()
                 .find(Foliao.class, id);
         foliaoServico.getEntityManager().refresh(objeto);
@@ -91,8 +90,8 @@ public class FoliaoManagerBean implements Serializable {
     }
 
     public Foliao buscarPorId(int id) {
-       this.foliao = foliaoServico.pegarId(id);
-       return this.foliao;
+        this.foliao = foliaoServico.pegarId(id);
+        return this.foliao;
     }
 
     public List<Foliao> listarTodosAtivos() {
@@ -146,9 +145,5 @@ public class FoliaoManagerBean implements Serializable {
     public void setValorIngresso(Double valorIngresso) {
         this.valorIngresso = valorIngresso;
     }
-
-    
-    
-    
 
 }
