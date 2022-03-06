@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:panel header="Área do Cliente" id="panelAreaCliente" >
+                <h:panelGrid columns="2" style="width: 50%">
+                    <p:panel header="Cadastro" id="panelCadastroFoliao">
+                        <h3>Dados Pessoais</h3>
+                        <h:panelGrid columns="2" style="width: 100%">
+                            <p:outputLabel value="Nome" />
+                            <p:inputText id="nome" value="#{foliaoManagerBean.foliao.nome}"/>
+
+                            <p:outputLabel value="CPF" />
+                            <p:inputMask id="cpf" value="#{foliaoManagerBean.foliao.cpf}" mask="999.999.999-99"/>
+
+                            <p:outputLabel value="RG" />
+                            <p:inputText id="rg" value="#{foliaoManagerBean.foliao.rg}"/>
+
+                            <p:outputLabel value="Data de Nascimento: " />
+                            <p:datePicker id="dtNasc" value="#{foliaoManagerBean.foliao.dataNascimento}" 
+                                         mask="99/99/9999"
+                                         monthNavigator="true" yearNavigator="true" yearRange="1922:2022" />   
+                        </h:panelGrid>
+                        <p:divider />
+                        <h3>Endereço</h3>
+                        <h:panelGrid columns="2" style="width: 100%">
+                            <p:outputLabel value="Tipo End: " />
+                            <p:selectOneMenu id="tpLogradouro" 
+                                             value="#{foliaoManagerBean.foliao.endereco.tipoLogradouro}"
+                                             filter="true">
+                                <f:selectItem itemLabel="Selecione..." />
+                                <f:selectItems value="#{data.tipoLogradouros}" 
+                                               var="tp_log" itemLabel=""/>
+                            </p:selectOneMenu>
+
+                            <p:outputLabel value="Endereço: "  />
+                            <p:inputText id="logradouro" value="#{foliaoManagerBean.foliao.endereco.logradouro}"/>
+
+                            <p:outputLabel value="Numero: " />
+                            <p:inputText id="numero" value="#{foliaoManagerBean.foliao.endereco.numero}"/>
+
+                            <p:outputLabel value="Bairro: " />
+                            <p:inputText id="bairro" value="#{foliaoManagerBean.foliao.endereco.bairro}"/>
+
+                            <p:outputLabel value="Cidade: " />
+                            <p:inputText id="cidade" value="#{foliaoManagerBean.foliao.endereco.cidade}"/> 
+
+                            <p:outputLabel value="Estado: " />
+                            <p:inputText id="estado" value="#{foliaoManagerBean.foliao.endereco.estado}"/> 
+
+                            <p:outputLabel value="CEP: " />
+                            <p:inputMask id="cep" value="#{foliaoManagerBean.foliao.endereco.cep}" 
+                                         mask="99999-999"/> 
+                        </h:panelGrid>
+                        <p:commandButton value="Salvar" 
+                                         actionListener="#{foliaoManagerBean.salvar()}" update="@form" />
+                    </p:panel>
+                </h:panelGrid>
+            </p:panel>
+            
+            <br /> <br />
+
+            <center>
+                <p:button href="index.xhtml" value="Voltar para o Início" icon="pi pi-home" />
+            </center>
+        </h:form>
+    </h:body>
+</html>
+
